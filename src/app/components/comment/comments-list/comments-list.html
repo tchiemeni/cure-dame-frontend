@@ -1,0 +1,32 @@
+<div class="comments-list-container">
+
+    <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <mat-list *ngIf="!isLoading && comments.length > 0">
+        <mat-list-item *ngFor="let comment of comments; trackBy:trackById">
+            <mat-icon matListItemIcon>person_pin</mat-icon>
+            <div matListItemTitle class="comment-author">
+                {{ comment.user.name }}
+            </div>
+            <div matListItemLine class="comment-content">
+                {{ comment.content }}
+            </div>
+            <div matListItemLine class="comment-date">
+                {{ comment.created_at | date:'short' }}
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+
+    <div *ngIf="!isLoading && comments.length === 0" class="no-comments-message">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <p>Soyez le premier à commenter ce message.</p>
+    </div>
+
+</div>

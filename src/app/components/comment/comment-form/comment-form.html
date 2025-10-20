@@ -1,0 +1,19 @@
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Écrire un commentaire...</mat-label>
+    <textarea matInput formControlName="content" rows="2" required></textarea>
+    <mat-error *ngIf="commentForm.get('content')?.hasError('required')">Le commentaire ne peut être vide.</mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="commentForm.invalid || isLoading"
+    class="submit-button">
+    <mat-icon>send</mat-icon>
+    {{ isLoading ? 'Envoi...' : 'Commenter' }}
+  </button>
+
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+</form>

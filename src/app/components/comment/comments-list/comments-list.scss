@@ -1,0 +1,48 @@
+// src/app/components/comment/comments-list/comments-list.component.scss
+
+.comments-list-container {
+    max-height: 400px; /* Limite la hauteur pour les posts très commentés */
+    overflow-y: auto; /* Ajoute une barre de défilement */
+    padding: 10px 0;
+    margin-top: 15px;
+}
+
+mat-list-item {
+    height: auto !important;
+    min-height: 70px; /* Hauteur minimale pour les petits commentaires */
+    padding: 10px 0;
+
+    .comment-author {
+        font-weight: 600;
+        color: var(--mat-primary-700);
+        font-size: 0.9em;
+    }
+
+    .comment-content {
+        white-space: pre-wrap;
+        font-size: 0.95em;
+        margin-top: 2px;
+    }
+
+    .comment-date {
+        font-size: 0.75em;
+        color: #999;
+        margin-top: 5px;
+    }
+}
+
+.no-comments-message {
+    text-align: center;
+    padding: 20px 0;
+    color: #888;
+    mat-icon {
+        display: block;
+        margin: 0 auto 5px;
+        font-size: 30px;
+    }
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 15px 0;
+}

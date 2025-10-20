@@ -1,0 +1,62 @@
+/* Conteneur principal pour centrer l'élément sur la page */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; // Prend toute la hauteur de la fenêtre
+    padding: 20px;
+    background-color: #f0f2f5; // Un fond doux pour détacher la carte
+}
+
+/* Style de la carte d'inscription */
+.register-card {
+    max-width: 450px; // Taille maximale sur ordinateur/tablette
+    width: 100%;
+    margin: auto; // Centrage si la flexbox ne suffit pas (utile pour le responsive)
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Ombre légère pour effet de profondeur
+
+    @media (max-width: 600px) {
+        // Sur les téléphones, prend presque toute la largeur
+        margin: 10px;
+    }
+}
+
+/* Styles pour les champs et le bouton */
+.full-width {
+    width: 100%;
+    margin-bottom: 10px; // Espace entre les champs
+}
+
+.register-button {
+    margin-top: 20px;
+    padding: 10px 0; // Augmente la taille du bouton
+    font-size: 1.1em;
+}
+
+/* Message d'erreur */
+.error-message {
+    color: var(--mat-warn-500); // Utilise la couleur d'erreur de Material (rouge)
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--mat-warn-500);
+    border-radius: 4px;
+    text-align: center;
+    background-color: var(--mat-warn-50);
+}
+
+/* Actions (lien de connexion) */
+.register-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px !important; // S'assurer qu'il y a de l'espace
+
+    a {
+        color: var(--mat-primary-500); // Utilise la couleur primaire du thème
+        text-decoration: none;
+        margin-left: 5px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

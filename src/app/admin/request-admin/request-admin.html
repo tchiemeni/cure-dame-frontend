@@ -1,0 +1,57 @@
+<div class="admin-requests-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Gestion des Requêtes de Discussion</mat-card-title>
+            <mat-card-subtitle>Liste de toutes les requêtes soumises.</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <div *ngIf="isLoading" class="loading-center">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement des requêtes...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-box">
+        {{ errorMessage }}
+    </div>
+
+    <mat-accordion *ngIf="!isLoading && requests.length > 0" multi>
+        <mat-expansion-panel *ngFor="let request of requests; trackBy: trackById">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ request.subject }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Soumis par : {{ request.user.name }} | Statut : {{ getStatusText(request.status) }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <p><strong>Message :</strong> {{ request.message }}</p>
+            <p><strong>Soumis le :</strong> {{ request.created_at | date:'medium' }}</p>
+
+            <mat-divider></mat-divider>
+
+            <div class="admin-actions">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    *ngIf="request.status === 'pending'"
+                    (click)="markAsInProgress(request.id)">
+                    <mat-icon>handshake</mat-icon> Prendre en charge & Notifier
+                </button>
+
+                <p *ngIf="request.status === 'in_progress'">
+                    <mat-icon color="accent">schedule</mat-icon> Prise en charge effectuée. Courriel envoyé.
+                </p>
+                <p *ngIf="request.status === 'resolved'" class="resolved-status">
+                    <mat-icon color="accent">check_circle</mat-icon> Requête résolue.
+                </p>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <div *ngIf="!isLoading && requests.length === 0 && !errorMessage" class="no-requests-message">
+        <p>Aucune requête de discussion en attente.</p>
+    </div>
+</div>

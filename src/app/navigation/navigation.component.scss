@@ -1,0 +1,44 @@
+/* Assurez-vous que le conteneur Sidenav prend toute la hauteur de la vue */
+.sidenav-container {
+    height: 100vh;
+}
+
+/* Style de la barre latérale (sidenav) */
+.sidenav {
+    width: 200px; /* Largeur standard du menu */
+    background: #fdfdff; /* Couleur de fond plus claire */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* Légère ombre */
+}
+
+/* Style de la barre d'outils (toolbar) */
+.mat-toolbar {
+    /* La couleur primaire vient de votre thème, pas besoin de la redéfinir */
+    span {
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+}
+
+/* Zone de contenu principale (là où le <router-outlet> est injecté) */
+.content-area {
+    padding: 20px; /* Marge interne pour le contenu */
+    /* Assurez-vous que le contenu prend l'espace restant sous la barre d'outils */
+    height: calc(100vh - 64px); /* 100% de la vue moins la hauteur de la barre d'outils standard (64px) */
+    overflow-y: auto; /* Permet le défilement si le contenu est trop long */
+    background-color: #fafafa; /* Couleur de fond pour le contenu */
+
+    /* Ajustement de la hauteur pour les écrans de téléphone (où la toolbar est plus petite) */
+    @media (max-width: 599px) {
+        height: calc(100vh - 56px); /* Hauteur de la toolbar sur mobile */
+    }
+}
+
+/* Style des éléments de la liste de navigation */
+mat-nav-list a {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}

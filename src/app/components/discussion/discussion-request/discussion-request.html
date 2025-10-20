@@ -1,0 +1,72 @@
+<div class="request-container">
+
+  <mat-card class="request-card">
+    <mat-card-header>
+      <mat-card-title>Soumettre une Requête de Discussion</mat-card-title>
+      <mat-card-subtitle>Confiez votre préoccupation à l'Homme de Dieu.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Sujet de la requête</mat-label>
+          <input matInput formControlName="subject" required>
+          <mat-error *ngIf="requestForm.get('subject')?.hasError('required')">Le sujet est requis.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Message détaillé</mat-label>
+          <textarea matInput formControlName="message" rows="5" required></textarea>
+          <mat-error *ngIf="requestForm.get('message')?.hasError('required')">Le message est requis.</mat-error>
+        </mat-form-field>
+
+        <div *ngIf="formMessage" [ngClass]="{'success-message': formMessage.type === 'success', 'error-message': formMessage.type === 'error'}">
+          {{ formMessage.text }}
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="requestForm.invalid" class="full-width submit-button">
+          <mat-icon>send</mat-icon> Envoyer la Requête
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="submitted-card">
+    <mat-card-header>
+      <mat-card-title>Vos Requêtes Précédentes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div *ngIf="submittedRequests.length === 0" class="no-requests-message">
+        Vous n'avez soumis aucune requête pour l'instant.
+      </div>
+
+      <mat-accordion *ngIf="submittedRequests.length > 0" multi>
+        <mat-expansion-panel *ngFor="let request of submittedRequests; let i = index" [expanded]="i === 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ request.subject }}
+            </mat-panel-title>
+            <mat-panel-description>
+              Statut : <span [ngClass]="'status-' + request.status">{{ getStatusText(request.status) }}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <p><strong>Soumis le :</strong> {{ request.created_at | date:'medium' }}</p>
+          <p><strong>Détails :</strong></p>
+          <p>{{ request.message }}</p>
+
+          <mat-divider></mat-divider>
+          <p class="status-tip">
+            <mat-icon [color]="request.status === 'resolved' ? 'accent' : 'warn'">
+              {{ request.status === 'resolved' ? 'check_circle' : 'schedule' }}
+            </mat-icon>
+            {{ request.status === 'resolved' ? 'Votre requête a été traitée.' : 'En attente de prise en charge par l\'équipe.' }}
+          </p>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </mat-card-content>
+  </mat-card>
+</div>

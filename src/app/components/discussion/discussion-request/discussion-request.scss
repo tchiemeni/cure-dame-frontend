@@ -1,0 +1,116 @@
+/* Conteneur principal utilisant Grid pour un layout responsive */
+.request-container {
+    padding: 20px;
+    max-width: 1100px; /* Largeur maximale pour le contenu */
+    margin: 20px auto;
+    display: grid;
+    gap: 25px; /* Espace entre les deux colonnes (cartes) */
+
+    // Layout par défaut (mobile) : une seule colonne
+    grid-template-columns: 1fr;
+
+    // Layout Desktop/Tablet : deux colonnes égales
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1.5fr; /* Le formulaire est plus petit, les requêtes plus larges */
+    }
+}
+
+/* Styles pour les cartes */
+.request-card {
+    // Sur mobile, le formulaire prend toute la largeur
+    grid-column: 1 / -1;
+
+    // Sur desktop, le formulaire est dans la première colonne
+    @media (min-width: 768px) {
+        grid-column: 1 / 2;
+    }
+}
+
+.submitted-card {
+    // Sur mobile, les requêtes prennent toute la largeur
+    grid-column: 1 / -1;
+
+    // Sur desktop, les requêtes sont dans la deuxième colonne
+    @media (min-width: 768px) {
+        grid-column: 2 / 3;
+    }
+}
+
+/* Utilitaires de formulaire */
+.full-width {
+    width: 100%;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+/* Styles pour les messages de statut du formulaire */
+.success-message, .error-message {
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.success-message {
+    color: var(--mat-success-700, #155724); // Vert foncé
+    border: 1px solid var(--mat-success-500, #c3e6cb);
+    background-color: var(--mat-success-50, #d4edda); // Vert très pâle
+}
+
+.error-message {
+    color: var(--mat-warn-700, #721c24); // Rouge foncé
+    border: 1px solid var(--mat-warn-500, #f5c6cb);
+    background-color: var(--mat-warn-50, #f8d7da); // Rouge très pâle
+}
+
+/* Styles spécifiques à l'affichage des requêtes soumises */
+.no-requests-message {
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Statuts dans les en-têtes d'expansion */
+mat-panel-description {
+    display: flex;
+    justify-content: flex-end; /* Aligner à droite */
+    align-items: center;
+
+    span {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        font-weight: bold;
+    }
+}
+
+.status-pending {
+    color: #856404;
+    background-color: #fff3cd;
+}
+.status-in_progress {
+    color: #004085;
+    background-color: #cce5ff;
+}
+.status-resolved {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+/* Conseil de statut en bas du panneau */
+.status-tip {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    font-size: 0.9em;
+    color: #6c757d;
+
+    mat-icon {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+}

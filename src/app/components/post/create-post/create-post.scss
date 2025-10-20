@@ -1,0 +1,62 @@
+.create-post-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 100%;
+    // Peut être ajusté pour les grands écrans si vous avez d'autres champs à côté
+}
+
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .upload-button {
+        flex-grow: 1;
+        text-align: left;
+        padding: 10px 15px;
+        mat-icon {
+            margin-right: 8px;
+        }
+    }
+
+    .file-size {
+        margin-left: 10px;
+        font-size: 0.85em;
+        color: #6c757d;
+    }
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 12px 0;
+    font-size: 1.1em;
+}
+
+.upload-progress {
+    margin-top: 15px;
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--mat-primary-500);
+    margin-top: 5px;
+}
+
+.error-message {
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid var(--mat-warn-500);
+    background-color: var(--mat-warn-50);
+    color: var(--mat-warn-800);
+    border-radius: 4px;
+    text-align: center;
+}

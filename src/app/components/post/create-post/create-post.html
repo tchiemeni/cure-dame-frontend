@@ -1,0 +1,61 @@
+<mat-card class="create-post-card">
+  <mat-card-header>
+    <mat-card-title>Publier un Nouveau Contenu</mat-card-title>
+    <mat-card-subtitle>Vidéo, Audio, ou Message de Prière.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre du Post</mat-label>
+        <input matInput formControlName="title" required>
+        <mat-icon matSuffix>title</mat-icon>
+        <mat-error *ngIf="postForm.get('title')?.hasError('required')">Le titre est obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Type de Contenu</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option *ngFor="let type of postTypes" [value]="type.value">
+            {{ type.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="postForm.get('type')?.hasError('required')">Le type est requis.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Message détaillé ou Prière</mat-label>
+        <textarea matInput formControlName="content" rows="4"></textarea>
+        </mat-form-field>
+
+      @if (postForm.get('type')?.value !== 'prayer') {
+        <div class="file-upload-container">
+          <input type="file" #fileInput (change)="onFileSelected($event)" [required]="postForm.get('type')?.value !== 'prayer'" style="display: none;">
+          <button mat-raised-button type="button" (click)="fileInput.click()" color="accent" class="upload-button">
+            <mat-icon>attach_file</mat-icon>
+            {{ selectedFile ? 'Fichier sélectionné : ' + selectedFile.name : 'Choisir un Fichier Média (Vidéo/Audio)' }}
+          </button>
+
+          @if (selectedFile) {
+            <span class="file-size"> ({{ (selectedFile.size / 1024 / 1024) | number:'1.0-2' }} Mo)</span>
+          }
+        </div>
+      }
+
+      @if (isLoading) {
+        <mat-progress-bar mode="indeterminate" class="upload-progress"></mat-progress-bar>
+        <p class="loading-text">Publication en cours...</p>
+      }
+
+      @if (uploadError) {
+        <div class="error-message">{{ uploadError }}</div>
+      }
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid || isLoading" class="full-width submit-button">
+        <mat-icon>publish</mat-icon> {{ isLoading ? 'Publication...' : 'Publier' }}
+      </button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

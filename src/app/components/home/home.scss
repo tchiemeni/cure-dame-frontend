@@ -1,0 +1,163 @@
+.home-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto; /* Centrer le contenu du fil d'actualité */
+}
+
+/* En-tête (Header) */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+
+    h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: var(--mat-primary-900);
+    }
+
+    .program-info {
+        font-size: 0.9em;
+        color: #6c757d;
+        margin-right: 15px; /* Espace entre l'info et le bouton */
+        flex-grow: 1;
+        text-align: right;
+
+        @media (max-width: 600px) {
+            display: none; /* Cache l'info sur mobile pour faire de la place */
+        }
+    }
+
+    button {
+        white-space: nowrap; /* Empêche le bouton de s'enrouler */
+    }
+}
+
+/* Spinner de chargement et messages */
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    p {
+        color: var(--mat-primary-500);
+        margin-top: 10px;
+    }
+}
+
+.error-message {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--mat-warn-500);
+    background-color: var(--mat-warn-50);
+    color: var(--mat-warn-800);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Conteneur du fil d'actualité */
+.post-feed {
+    display: grid;
+    gap: 20px; /* Espace entre les cartes de post */
+}
+
+/* Carte de post individuelle */
+.post-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    &:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        // transform: translateY(-2px); /* Léger effet de soulèvement */
+    }
+}
+
+/* Avatar avec icône */
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--mat-primary-50);
+    mat-icon {
+        font-size: 20px;
+    }
+}
+
+/* Contenu du post (texte et média) */
+.post-content {
+    white-space: pre-wrap; /* Maintient les sauts de ligne si l'utilisateur en a mis */
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.media-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.post-media, .post-media-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain; /* Assure que le média est visible sans distorsion */
+    background-color: #000; /* Fond noir pour les vidéos/audios */
+    border-radius: 4px;
+}
+
+/* Actions */
+mat-card-actions {
+    padding: 8px 16px 8px;
+    border-top: 1px solid #eee;
+
+    button {
+        font-weight: 500;
+        mat-icon {
+            margin-right: 5px;
+            font-size: 18px;
+        }
+    }
+}
+
+.no-content {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+/* Style de la zone de commentaires */
+.comments-section {
+    padding-top: 5px;
+    padding-bottom: 5px !important; /* Remplacer le padding par défaut de mat-card-content */
+
+    h4 {
+        font-size: 1.1em;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        color: var(--mat-primary-900);
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    button {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+}
+
+.comment-list {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+
+    .no-comments {
+        color: #888;
+        font-style: italic;
+        margin: 0;
+    }
+}
